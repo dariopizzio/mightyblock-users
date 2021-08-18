@@ -22,6 +22,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UtilsService utils;
 
+    /**
+     * Security configuration
+     * AuthorizationFilter: Filter to validate every request
+     * Login url is the only one that is not validated in every environment
+     * and in dev and test environments the swagger urls are allowed
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().cors().and()

@@ -10,6 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller for every endpoint related with users
+ */
 @Controller
 @RequestMapping(value = "/users")
 public class UserController {

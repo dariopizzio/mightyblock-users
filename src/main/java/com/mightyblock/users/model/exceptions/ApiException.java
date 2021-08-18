@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 
 import java.sql.Timestamp;
 
+/**
+ * Custom Exception
+ */
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class ApiException extends Exception {

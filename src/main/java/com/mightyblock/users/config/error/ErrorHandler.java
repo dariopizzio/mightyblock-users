@@ -7,6 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/**
+ * Exception handler
+ * Every handler should return an ApiErrorDto to normalize the response
+ * in case of error
+ */
 @Slf4j
 @ControllerAdvice
 public class ErrorHandler {

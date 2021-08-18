@@ -1,14 +1,10 @@
 package com.mightyblock.users.config.authentication;
 
 import com.mightyblock.users.dto.TokenDto;
-import com.mightyblock.users.model.exceptions.PropertyNotFoundException;
-import com.mightyblock.users.utils.UserConstants;
-import com.mightyblock.users.utils.UtilsService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -31,9 +27,6 @@ public class TokenProvider {
 
     @Value("${conf.token.secretkey}")
     private String secretKey;
-
-    @Autowired
-    UtilsService utils;
 
     /**
      * Function to obtain a token given a username
