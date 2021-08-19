@@ -36,6 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(new AuthorizationFilter(tokenProvider, utils), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, UserConstants.LOGIN_URL).permitAll()
+                .antMatchers(HttpMethod.POST, UserConstants.SIGNUP_URL).permitAll()
                 .antMatchers(utils.getProperty(UserConstants.FILTER_EXCLUDED_URLS, String[].class)).permitAll()
                 .anyRequest().authenticated();
     }
