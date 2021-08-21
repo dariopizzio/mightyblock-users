@@ -32,9 +32,10 @@ public class TokenProvider {
      * Function to obtain a token given a username
      *
      * @param username username authenticated
+     * @param userId userId authenticated
      * @return TokenDto generated token
      */
-    public TokenDto getToken(String username) {
+    public TokenDto getToken(String username, String userId) {
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
                 .commaSeparatedStringToAuthorityList("ROLE_USER");
 
@@ -46,13 +47,14 @@ public class TokenProvider {
                         grantedAuthorities.stream()
                                 .map(GrantedAuthority::getAuthority)
                                 .collect(Collectors.toList()))
+                .claim("userId", userId)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
                 .signWith(SignatureAlgorithm.HS512,
                         secretKey.getBytes()).compact();
 
         return new TokenDto(PREFIX + token,
-                new Date().getTime()+expirationTime);
+                (System.currentTimeMillis() + expirationTime));
     }
 
     /**

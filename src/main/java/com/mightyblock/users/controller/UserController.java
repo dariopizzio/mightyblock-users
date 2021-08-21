@@ -31,15 +31,6 @@ public class UserController {
     }
 
     /**
-     * @param token
-     * @return
-     */
-    @PostMapping(value = "/refresh-token", produces = { MediaType.APPLICATION_JSON_VALUE })//TODO ver si no eliminarlo
-    public ResponseEntity<Object> refreshToken(TokenDto token){
-        return ResponseEntity.ok(userService.refreshToken(token));
-    }
-
-    /**
      * @param user user to create
      * @return HttpStatus ok = 200 if the user was created
      * @throws ApiException when a username already exists or another issue

@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 
 @Data
 @Document(collection = "users")
@@ -16,7 +16,7 @@ public class User implements Serializable {
     private String id;
     private String username;
     private String password;
-    private Timestamp lastLogin;
+    private Date lastLogin;
 
     public User(String username, String password){
         this.username = username;

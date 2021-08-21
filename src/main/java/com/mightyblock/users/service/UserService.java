@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class UserService {
 
@@ -27,14 +29,11 @@ public class UserService {
     public TokenDto login(UserDto userDto) throws ApiException {
         User user = repository.findOneByUsernameAndPassword(userDto.getUsername(), userDto.getPassword());
         if(user!=null){
-            return tokenProvider.getToken(userDto.getUsername());
+            user.setLastLogin(new Date());
+            repository.save(user);
+            return tokenProvider.getToken(user.getUsername(), user.getId());
         }
         throw new ApiException(HttpStatus.FORBIDDEN, HttpStatus.FORBIDDEN.getReasonPhrase(), "/users/login");
-    }
-
-    public Object refreshToken(TokenDto jwt) {
-        //TODO validate user and return jwt
-        return "jwt";
     }
 
     /**
