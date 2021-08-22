@@ -49,16 +49,26 @@ public class UserServiceTest {
     }
 
     @Test
-    void createUser_shouldThrewAnApiException() {
+    void createUser_shouldThrowAnApiException() {
         UserDto userToCreate = new UserDto("userTest", "passwordTest");
         ApiException exception = Assert.assertThrows(ApiException.class, () -> userService.createUser(userToCreate));
         Assert.assertEquals(HttpStatus.BAD_REQUEST, exception.getStatus());
     }
 
     @Test
-    void createUser_shouldCreateAnUserAndReturnAnId() throws ApiException {
+    void createUser_shouldReturnAnUserId() throws ApiException {
         UserDto userToCreate = new UserDto("userTest2", "passwordTest2");
         String id = userService.createUser(userToCreate);
         Assert.assertEquals("id2", id);
+    }
+
+    @Test
+    void login_withAnInvalidUserShouldThrowFORBIDDEN() {
+        //TODO implement!
+    }
+
+    @Test
+    void login_withValidUserShouldReturnToken() {
+        //TODO implement!
     }
 }
