@@ -8,6 +8,7 @@ import com.mightyblock.users.repository.UserRepository;
 import com.mightyblock.users.service.UserService;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +21,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Arrays;
+import java.util.Collections;
 
 @ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -41,7 +42,7 @@ public class UserServiceTest {
     @BeforeEach
     public void initMocks(){
         User userCreated = new User("userTest", "passwordTest");
-        Mockito.when(repository.findByUsername("userTest")).thenReturn(Arrays.asList(userCreated));
+        Mockito.when(repository.findByUsername("userTest")).thenReturn(Collections.singletonList(userCreated));
         User newUser = new User("userTest2", "passwordTest2");
         User newUserWithId = new User("userTest2", "passwordTest2");
         newUserWithId.setId("id2");
@@ -52,14 +53,14 @@ public class UserServiceTest {
     void createUser_shouldThrowAnApiException() {
         UserDto userToCreate = new UserDto("userTest", "passwordTest");
         ApiException exception = Assert.assertThrows(ApiException.class, () -> userService.createUser(userToCreate));
-        Assert.assertEquals(HttpStatus.BAD_REQUEST, exception.getStatus());
+        Assertions.assertEquals(HttpStatus.BAD_REQUEST, exception.getStatus());
     }
 
     @Test
     void createUser_shouldReturnAnUserId() throws ApiException {
         UserDto userToCreate = new UserDto("userTest2", "passwordTest2");
         String id = userService.createUser(userToCreate);
-        Assert.assertEquals("id2", id);
+        Assertions.assertEquals("id2", id);
     }
 
     @Test
